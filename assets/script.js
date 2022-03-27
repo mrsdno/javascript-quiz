@@ -7,6 +7,7 @@ var questionElement = document.getElementById('question');
 var answerButtonsEl = document.getElementById('answer-buttons');
 var currentScore = 0;
 var timeLeft = 60;
+let currentQuestionIndex = 0;
 
 const questions = [
  {
@@ -17,11 +18,23 @@ const questions = [
     { text: 'c', correct: false },
     { text: 'd', correct: false },
    ]
- }
+ },
+ {  
+ question: "OMG you made it to question 2!",
+ answers: [
+   { text: '1', correct: false },
+   { text: '2', correct: false },
+   { text: '3', correct: true },
+   { text: '4', correct: false },
+ ]
+ },
+
+
 ]
 
 // add listener to start button
 startButton.addEventListener('click', startQuiz);
+nextButton.addEventListener('click', nextQuestion);
 
 function startTimer() {
 
@@ -47,27 +60,37 @@ function startQuiz() {
     startButton.classList.add('hide');
     questionContainer.classList.remove('hide');
 
+    // start the countdown timer
+    startTimer();
+
     // display the next question
     nextQuestion();
 
-    // start the countdown timer
-    startTimer();
+    console.log(currentQuestionIndex);
 }
 
 function nextQuestion() {
     //clear the question container to prepare to append answer options
     clearQuestionContainer();
+    displayQuestion(); 
+    currentQuestionIndex ++;
+    console.log(currentQuestionIndex);
+}
 
-    //display the first question
-    let question = questions[0].question;
+function displayQuestion() {
+      //question if current index < index length
+    
+    if (currentQuestionIndex < questions.length) {
+    let question = questions[currentQuestionIndex].question;
     questionElement.textContent = question;
-
+    
+  
     //loop through answer options and append them to the container
-    questions[0].answers.forEach(answer => {
+    questions[currentQuestionIndex].answers.forEach(answer => {
         const button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add('btn');
-
+  
         //assign a string to the correct answer if it is selected
         if (answer.correct) {
             button.dataset.correct = answer.correct;
@@ -75,9 +98,15 @@ function nextQuestion() {
 
         //call select answer function if button is clicked 
         button.addEventListener('click', selectAnswer);
-
+  
         answerButtonsEl.appendChild(button);
-    })
+      })
+    }
+    else {
+        questionContainer.classList.add('hide');
+        startButton.classList.remove('hide');
+        startButton.textContent = "Restart"; 
+    }
 }
 
 function clearQuestionContainer() {
@@ -87,6 +116,7 @@ function clearQuestionContainer() {
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild(answerButtonsEl.firstChild);
     }
+
 }
 
 function selectAnswer(e, timerEl) {
@@ -104,27 +134,5 @@ function selectAnswer(e, timerEl) {
         //lose 5 seconds for getting the wrong answer
         timeLeft=timeLeft-5;
     }
+    nextButton.classList.remove('hide');
 }
-
-
-
-
-
-// var displayQuestion = function () {
-    
-
-//     for(var i=0; i < quizQuestions.length; i++) {
-//         var displayQuestionEl = document.createElement("div");
-//         displayQuestionEl=quizQuestions[i]
-//         quizEl.appendChild(displayQuestionEl);
-//     //     var response = window.prompt(quizQuestions[i].prompt);
-
-//     //     if(response == quizQuestions[i].answer) {
-//     //         score++;
-//     //         alert("Correct");
-//     //     }
-
-//     //     else {
-//     //         alert("Wrong");
-//     //     }
-//     // }
