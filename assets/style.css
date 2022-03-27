@@ -28,6 +28,11 @@ body {
     background-color: var(--yellow);
     padding: 50px;
     border-radius: 20px;
+    width: 800px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .timer {
@@ -63,6 +68,11 @@ body {
 
 .btn:hover {
     background-color: var(--purple);
+}
+
+.start-btn {
+    width: 600px;
+    height: 200px;
 }
 
 .controls {
