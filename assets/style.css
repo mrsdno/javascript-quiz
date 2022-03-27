@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+}
+
+.quiz {
+    text-align: center;
+}
