@@ -5,6 +5,8 @@ var questionContainer = document.getElementById('question-container');
 var timerEl = document.getElementById('timer');
 var questionElement = document.getElementById('question');
 var answerButtonsEl = document.getElementById('answer-buttons');
+var currentScore = 0;
+var timeLeft = 60;
 
 const questions = [
  {
@@ -18,9 +20,26 @@ const questions = [
  }
 ]
 
-
 // add listener to start button
 startButton.addEventListener('click', startQuiz);
+
+function startTimer() {
+
+    var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
+            timerEl.textContent = timeLeft + ' seconds remaining';
+            timeLeft--;
+        } else if (timeLeft === 1) {
+            timerEl.textContent = timeLeft + ' second remaining';
+            timeLeft--;
+        } else {
+            timerEl.textContent = '';
+            clearInterval(timeInterval);
+            timerEl.textContent = "Time's up!";
+        }
+    }, 1000);
+
+}
 
 
 function startQuiz() {
@@ -70,29 +89,24 @@ function clearQuestionContainer() {
     }
 }
 
-function selectAnswer() {
+function selectAnswer(e, timerEl) {
 
+    const selectedButton = e.target;
+    var selectedButtonCorrect = selectedButton.getAttribute("data-correct");
+
+    if (selectedButtonCorrect === "true") {
+        console.log('i am true');
+        //player gets 1 point
+        currentScore ++;
+    }
+    else {
+        console.log('my value is false');
+        //lose 5 seconds for getting the wrong answer
+        timeLeft=timeLeft-5;
+    }
 }
 
-function startTimer() {
-    
-    //set time to 60 seconds
-    var timeLeft = 60;
 
-    var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
-            timerEl.textContent = timeLeft + ' seconds remaining';
-            timeLeft--;
-        } else if (timeLeft === 1) {
-            timerEl.textContent = timeLeft + ' second remaining';
-            timeLeft--;
-        } else {
-            timerEl.textContent = '';
-            clearInterval(timeInterval);
-            timerEl.textContent = "Time's up!";
-        }
-    }, 1000);
-}
 
 
 
