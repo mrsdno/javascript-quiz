@@ -12,14 +12,19 @@
     <div class="timer" id="timer">Let's get started!</div>
     <!-- main quiz body -->
     <div class="container">
+    <div class="end-game hide" id="end-game">
+        <h1 id="end-game-text">text goes here</h1>
+        <h2 id="end-game-score">score goes here</h2>
+
+        <div id="player-initials-el"><input type="text" name="player-initials" id="player-intials" placeholder="intials" />
+            <button id="save-btn">save high score</button>
+        </div>
+        
+    </div> 
         <div id="question-container" class="hide">
             <div id="question">Question</div>
-            <div id ="answer-buttons" class="btn-grid">
-
-            </div>
+            <div id ="answer-buttons" class="btn-grid"></div>
         </div>
-
-
             <!-- start button for quiz -->
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start</button>
