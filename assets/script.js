@@ -34,6 +34,8 @@ const questions = [
 
 // add listener to start button
 startButton.addEventListener('click', startQuiz);
+
+// add listener to next button
 nextButton.addEventListener('click', nextQuestion);
 
 function startTimer() {
@@ -56,24 +58,21 @@ function startTimer() {
 
 
 function startQuiz() {
-    //hide the startbutton, and display the question container
+
+    startTimer();
+
+    displayQuestion();
+
     startButton.classList.add('hide');
     questionContainer.classList.remove('hide');
 
-    // start the countdown timer
-    startTimer();
-
-    // display the next question
-    nextQuestion();
-
-    console.log(currentQuestionIndex);
 }
 
 function nextQuestion() {
     //clear the question container to prepare to append answer options
     clearQuestionContainer();
-    displayQuestion(); 
     currentQuestionIndex ++;
+    displayQuestion(); 
     console.log(currentQuestionIndex);
 }
 
@@ -98,20 +97,19 @@ function displayQuestion() {
 
         //call select answer function if button is clicked 
         button.addEventListener('click', selectAnswer);
+
   
         answerButtonsEl.appendChild(button);
       })
     }
-    else {
-        questionContainer.classList.add('hide');
-        startButton.classList.remove('hide');
-        startButton.textContent = "Restart"; 
-    }
+        else {
+            endGame();
+        }
 }
 
 function clearQuestionContainer() {
 
-    //hide next button and remove default answer options
+    //hide next button and remove old answer options
     nextButton.classList.add('hide');
     while (answerButtonsEl.firstChild) {
         answerButtonsEl.removeChild(answerButtonsEl.firstChild);
@@ -119,7 +117,7 @@ function clearQuestionContainer() {
 
 }
 
-function selectAnswer(e, timerEl) {
+function selectAnswer(e) {
 
     const selectedButton = e.target;
     var selectedButtonCorrect = selectedButton.getAttribute("data-correct");
@@ -128,11 +126,20 @@ function selectAnswer(e, timerEl) {
         console.log('i am true');
         //player gets 1 point
         currentScore ++;
+        nextButton.classList.remove('hide');
     }
     else {
         console.log('my value is false');
         //lose 5 seconds for getting the wrong answer
         timeLeft=timeLeft-5;
     }
-    nextButton.classList.remove('hide');
+    
+
+}
+
+function endGame () {
+    questionContainer.classList.add('hide');
+    startButton.classList.remove('hide');
+    startButton.textContent = "Restart"; 
+    currentQuestionIndex = 0;
 }
