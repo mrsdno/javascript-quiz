@@ -8,30 +8,43 @@
     <title>Javascript Quiz</title>
 </head>
 <body>
+    <!-- banner for high score at the top of page -->
+    <div id="high-score">Take the quiz to set the high score!</div>
+
+    <div class="flex-box">
+    <!-- header text with directions -->
+    <header>
+        <h1>Practice your Javascript knowledge with this fun quiz!</h1>
+        <p>You have 60 seconds to complete the quiz. You must pick the correct answer to move onto the next question. If you pick the wrong answer - you will lose time! Complete the quiz quickly and accurately to get the high score!</p>
+    </header>
+
     <!-- timer -->
-    <div class="timer" id="timer">Let's get started!</div>
+    <div class="timer" id="timer">Good luck! You have one minute after you press Start!</div>
     <!-- main quiz body -->
     <div class="container">
-    <div class="end-game hide" id="end-game">
-        <h1 id="end-game-text">text goes here</h1>
-        <h2 id="end-game-score">score goes here</h2>
-
-        <div id="player-initials-el"><input type="text" name="player-initials" id="player-intials" placeholder="intials" />
-            <button id="save-btn">save high score</button>
-        </div>
-        
-    </div> 
+        <!-- container for the questions and answers -->
         <div id="question-container" class="hide">
             <div id="question">Question</div>
             <div id ="answer-buttons" class="btn-grid"></div>
         </div>
-            <!-- start button for quiz -->
+        <!-- container for the end game text -->
+        <div class="end-game hide" id="end-game">
+            <h1 id="end-game-text">text goes here</h1>
+            <h2 id="end-game-score">score goes here</h2>
+            <!-- input for player initals if they get the high score -->
+            <div id="player-initials-el"><input type="text" name="player-initials" id="player-intials" placeholder="intials" />
+                <button id="save-btn" class="save-btn">save high score</button>
+            </div>
+            
+        </div> 
+
         <div class="controls">
             <button id="start-btn" class="start-btn btn">Start</button>
             <button id="next-btn" class="next-btn btn hide">Next</button>
         </div>
-    </div>
 
+    </div>
+    </div>
 
 
     <script src="assets/script.js"></script>

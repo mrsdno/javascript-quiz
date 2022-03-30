@@ -16,20 +16,37 @@
 body {
     padding: 0;
     margin: 0;
+    background-color: var(--teal);
+
+}
+
+.flex-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: var(--teal);
-    flex-direction: column;
+    flex-direction: column;   
 }
+
+header {
+    color: var(--white);
+    text-align: center;
+}
+
+#high-score {
+    background-color: var(--yellow);
+    padding: 20px;
+    color: var(--purple);
+    font-weight: bold;
+
+}
+
 
 .container {
     background-color: var(--yellow);
     padding: 50px;
     border-radius: 20px;
-    width: 800px;
-    height: 600px;
+    width: 80vw;
+    height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,8 +54,13 @@ body {
 
 .timer {
     color: var(--white);
-    padding-bottom: 30px;
-    font-size: 30px; 
+    text-align:center;
+    padding: 30px;
+    width: 80vw;
+    margin-bottom: 10px;
+    font-size: 20px; 
+    border-radius: 20px;
+    background-color: var(--purple);
     font-weight: lighter;
 }
 
@@ -53,7 +75,9 @@ body {
 .btn-grid {
     display: grid;
     grid-template-columns: repeat(2, auto);
+    justify-items: center;
     gap: 10px;
+    margin: auto;
 }
 
 .btn {
@@ -78,7 +102,7 @@ body {
     outline: none;
 }
 
-.btn:hover {
+.btn:hover, .save-btn:hover {
     background-color: var(--purple);
 }
 
@@ -91,6 +115,49 @@ body {
     display: flex;
     justify-content: center;
 }
+
+.end-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+#end-game-text {
+    border-bottom: 5px solid var(--purple);
+    padding-bottom: 10px;
+}
+
+#end-game-score {
+    text-align: center;
+    margin-top: 10px;
+}
+
+input {
+    background-color: var(--teal);
+    color: white;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 20px;
+    width: 100px;
+    text-align: center;
+}
+
+::placeholder {
+    color: white;
+    font-size: 20px;
+}
+
+.save-btn {
+    width: 200px;
+    height: 60px;
+    border-radius: 20px;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 20px;
+}
+
 
 .hide {
     display: none;

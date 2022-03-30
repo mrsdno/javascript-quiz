@@ -5,6 +5,7 @@ var questionContainer = document.getElementById('question-container');
 var timerEl = document.getElementById('timer');
 var questionElement = document.getElementById('question');
 var answerButtonsEl = document.getElementById('answer-buttons');
+var highScoreEl = document.getElementById('high-score');
 var currentScore = 0;
 var timeInterval;
 var startTime = 60;
@@ -31,28 +32,66 @@ const questions = [
    ]
  },
 
- {  
- question: "Which built-in method reverses the order of the elements of an array?",
- answers: [
-   { text: 'changeOrder(order)', correct: false },
-   { text: 'sort(order)', correct: false },
-   { text: 'reverse()', correct: true },
-   { text: 'None of the above', correct: false },
- ]
- },
+//  {  
+//  question: "Which built-in method reverses the order of the elements of an array?",
+//  answers: [
+//     { text: 'changeOrder(order)', correct: false },
+//     { text: 'sort(order)', correct: false },
+//     { text: 'reverse()', correct: true },
+//     { text: 'None of the above', correct: false },
+//     ]
+//  },
 
- {  
-    question: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
-    answers: [
-      { text: "The User's machine running a Web browser", correct: true },
-      { text: 'The Web server', correct: false },
-      { text: "A central machine deep within Netscape's corporate offices", correct: false },
-      { text: 'None of the above', correct: false },
-    ]
-    },
+//  {  
+//  question: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
+//  answers: [
+//     { text: "The User's machine running a Web browser", correct: true },
+//     { text: 'The Web server', correct: false },
+//     { text: "A central machine deep within Netscape's corporate offices", correct: false },
+//     { text: 'None of the above', correct: false },
+//     ]
+//     },
+
+// {  
+//  question: "Javascript is an _______ language?",
+//  answers: [
+//     { text: "Object-Based", correct: false },
+//     { text: 'Procedural', correct: false },
+//     { text: "Object Oriented", correct: true },
+//     { text: 'None of the above', correct: false },
+//     ]
+// },
+// {  
+//  question: "Which of the following keywords is used to define a variable in Javascript?",
+//  answers: [
+//     { text: "var", correct: false },
+//     { text: 'let', correct: false },
+//     { text: "both var and let", correct: true },
+//     { text: 'None of the above', correct: false },
+//     ]
+//    },
+
+
 ]
 
+// function to display high score
+function displayHighScore() {
+    var highestScore = JSON.parse(localStorage.getItem("highScore"));
 
+    // do not display if no high score
+    if (highestScore === null) {
+    }
+
+    else {
+        highScoreEl.textContent = "High Score: " + highestScore.initials + " " + highestScore.score;
+    }
+}
+
+//display the high score on page load
+window.onload = function() {
+    displayHighScore();
+
+}
 
 // add listener to start button
 startButton.addEventListener('click', startQuiz);
@@ -61,7 +100,7 @@ startButton.addEventListener('click', startQuiz);
 nextButton.addEventListener('click', nextQuestion);
 
 function startTimer() {
-
+    displayHighScore();
     timeLeft = startTime
 
     // hide the end game container in case retarting
@@ -183,10 +222,8 @@ function endGame (highScoreObj) {
     // get high score from local storage
     var highestScore = JSON.parse(localStorage.getItem("highScore"));
 
-
-
     // get the high score, check if player is better, if yes reset high score 
-    if (highScoreObj.initials === null) { 
+    if (highestScore == null) { 
         newHighScore();
     }
 
@@ -195,18 +232,20 @@ function endGame (highScoreObj) {
     }
     
     else if (currentScore === highestScore.score) {
+        timerEl.textContent= "";
         endGameContainer.classList.remove('hide');
         playerInitialsEl.classList.add('hide');
-        endGameTextEl.textContent = "you tied the high score!";
-        endGameScoreEl.textContent = "the high score is " + highestScore.score + " your score was " + currentScore;
+        endGameTextEl.textContent = "You tied the high score!";
+        endGameScoreEl.textContent = "Click the button below to try again to beat the high score!";
         restartGame();
     }
 
     else {
+        timerEl.textContent= "";
         endGameContainer.classList.remove('hide');
         playerInitialsEl.classList.add('hide');
-        endGameTextEl.textContent = "you didn't get the high score.";
-        endGameScoreEl.textContent = "the high score is " + highestScore.score + " your score was " + currentScore;
+        endGameTextEl.textContent = "Darn! You didn't beat the high score.";
+        endGameScoreEl.textContent = "The high score is " + highestScore.score + " your score was " + currentScore + ". Try again to beat the high score!";
         restartGame();
     }
 }
@@ -215,7 +254,8 @@ function newHighScore () {
     var saveButton = document.getElementById('save-btn');
     var playerScore = currentScore;
 
-    //display input for intials
+    // hide the other junk in the container box and the timer
+    timerEl.textContent= "";
     endGameContainer.classList.remove('hide');
     playerInitialsEl.classList.remove('hide');
     questionContainer.classList.add('hide');
@@ -233,12 +273,14 @@ function newHighScore () {
 
         //set new score to local storage
         localStorage.setItem("highScore", JSON.stringify(highScoreObj));
-
         restartGame();
+
+        displayHighScore();
     });
 
-    endGameTextEl.textContent = "you got the high score!";
-    endGameScoreEl.textContent = "the new high score is " + currentScore;
+    endGameTextEl.textContent = "Wow!! You got the new high score: " + currentScore + "!";
+    endGameScoreEl.textContent = "Enter your initials below and save your score. After you save, try again to beat your high score!";
+
 }
 
 
