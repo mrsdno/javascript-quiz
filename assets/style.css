@@ -43,7 +43,7 @@ body {
 }
 
 #question {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
     color: var(--purple);
     text-align: center;
@@ -60,6 +60,18 @@ body {
     background-color: var(--black);
     color: var(--white);
     font-size: 40px;
+    width: 300px;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    outline: none;
+}
+
+.btn-answer {
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 20px;
+    width: 300px;
     border-radius: 20px;
     padding: 10px;
     margin: 10px;

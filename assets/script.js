@@ -6,6 +6,7 @@ var timerEl = document.getElementById('timer');
 var questionElement = document.getElementById('question');
 var answerButtonsEl = document.getElementById('answer-buttons');
 var currentScore = 0;
+var timeInterval;
 var timeLeft = 60;
 let currentQuestionIndex = 0;
 var endGameContainer = document.getElementById('end-game');
@@ -20,23 +21,34 @@ var highScoreObj = {
 
 const questions = [
  {
-  question: "This is question 1?",
+  question: "Which built-in method combines the text of two strings and returns a new string??",
   answers: [
-    { text: 'a', correct: true },
-    { text: 'b', correct: false },
-    { text: 'c', correct: false },
-    { text: 'd', correct: false },
+    { text: 'append()', correct: false },
+    { text: 'concat()', correct: true },
+    { text: 'attach()', correct: false },
+    { text: 'None of the above', correct: false },
    ]
  },
+
  {  
- question: "OMG you made it to question 2!",
+ question: "Which built-in method reverses the order of the elements of an array?",
  answers: [
-   { text: '1', correct: false },
-   { text: '2', correct: false },
-   { text: '3', correct: true },
-   { text: '4', correct: false },
+   { text: 'changeOrder(order)', correct: false },
+   { text: 'sort(order)', correct: false },
+   { text: 'reverse()', correct: true },
+   { text: 'None of the above', correct: false },
  ]
  },
+
+ {  
+    question: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
+    answers: [
+      { text: "The User's machine running a Web browser", correct: true },
+      { text: 'The Web server', correct: false },
+      { text: "A central machine deep within Netscape's corporate offices", correct: false },
+      { text: 'None of the above', correct: false },
+    ]
+    },
 ]
 
 
@@ -52,7 +64,7 @@ function startTimer() {
     // hide the end game container in case retarting
     endGameContainer.classList.add("hide");
 
-    var timeInterval = setInterval(function() {
+    timeInterval = setInterval(function() {
         if (timeLeft > 1) {
             timerEl.textContent = timeLeft + ' seconds remaining';
             timeLeft--;
@@ -100,7 +112,8 @@ function displayQuestion() {
     questions[currentQuestionIndex].answers.forEach(answer => {
         const button = document.createElement('button');
         button.innerText = answer.text;
-        button.classList.add('btn');
+        button.classList.add('btn-answer');
+
   
         //assign a string to the correct answer if it is selected
         if (answer.correct) {
@@ -137,7 +150,6 @@ function selectAnswer(e) {
     if (selectedButtonCorrect === "true") {
         console.log('i am true');
         //player gets 1 point
-        currentScore ++;
         nextButton.classList.remove('hide');
     }
     else {
@@ -150,16 +162,28 @@ function selectAnswer(e) {
 }
 
 function endGame (highScoreObj) {
-    console.log("you got a score of " + currentScore);
-    var enteredInitials = document. querySelector("#player-intials");
+    
+    // stop the timer
+    clearInterval(timeInterval);
+
+    //set currentScore to the time left
+    currentScore = timeLeft;
+
+    // get high score from local storage
+    var highestScore = JSON.parse(localStorage.getItem("highScore"));
+
+
 
     // get the high score, check if player is better, if yes reset high score 
-    if (currentScore > highScoreObj.score) {
-
+    if (highScoreObj.initials === null) { 
+    
         var saveButton = document.getElementById('save-btn');
-        let playerScore = currentScore;
+        var playerScore = currentScore;
+
         //display input for intials
         endGameContainer.classList.remove('hide');
+        playerInitialsEl.classList.remove('hide');
+        questionContainer.classList.add('hide');
 
         //save player score when they hit save
         saveButton.addEventListener('click', function(event) {
@@ -173,38 +197,75 @@ function endGame (highScoreObj) {
             //set new score to local storage
             localStorage.setItem("highScore", JSON.stringify(highScoreObj));
 
-            console.log(highScoreObj);
-
-            
+            restartGame();
         });
-        
+    
         endGameTextEl.textContent = "you got the high score!";
         endGameScoreEl.textContent = "the new high score is " + currentScore;
+
+    }
+
+    else if (currentScore > highestScore.score) {
+        var saveButton = document.getElementById('save-btn');
+        var playerScore = currentScore;
+
+        //display input for intials
+        endGameContainer.classList.remove('hide');
+        playerInitialsEl.classList.remove('hide');
+        questionContainer.classList.add('hide');
+
+        //save player score when they hit save
+        saveButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var enteredInitials = document.querySelector("input[name='player-initials']").value;
+
+            highScoreObj.initials = enteredInitials;
+            highScoreObj.score = playerScore;
+
+            //set new score to local storage
+            localStorage.setItem("highScore", JSON.stringify(highScoreObj));
+
+            restartGame();
+        });
+    
+        endGameTextEl.textContent = "you got the high score!";
+        endGameScoreEl.textContent = "the new high score is " + currentScore;
+
     }
     
-    else if (currentScore === highScoreObj.score) {
+    else if (currentScore === highestScore.score) {
         endGameContainer.classList.remove('hide');
         playerInitialsEl.classList.add('hide');
         endGameTextEl.textContent = "you tied the high score!";
-        endGameScoreEl.textContent = "the high score is " + highScore.playerScore + " your score was " + currentScore;
+        endGameScoreEl.textContent = "the high score is " + highestScore.score + " your score was " + currentScore;
+        restartGame();
     }
 
     else {
         endGameContainer.classList.remove('hide');
         playerInitialsEl.classList.add('hide');
         endGameTextEl.textContent = "you didn't get the high score.";
-        endGameScoreEl.textContent = "the high score is " + highScore.playerScore + " your score was " + currentScore;
+        endGameScoreEl.textContent = "the high score is " + highestScore.score + " your score was " + currentScore;
+        restartGame();
     }
 
 
     
+
+
+}
+
+
+function restartGame() {
 
     //hide the question, show the start button but name "restart"
     questionContainer.classList.add('hide');
     startButton.classList.remove('hide');
     startButton.textContent = "Restart"; 
 
-    //reset the questionIndex and player score to zero
+    //reset the questionIndex, player score and timeLeft
     currentQuestionIndex = 0;
     currentScore= 0;
+    timeLeft=60;
 }
