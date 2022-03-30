@@ -30,6 +30,7 @@ body {
 header {
     color: var(--white);
     text-align: center;
+    width: 80vw;
 }
 
 #high-score {
@@ -95,7 +96,7 @@ header {
     background-color: var(--black);
     color: var(--white);
     font-size: 20px;
-    width: 300px;
+    width: 80%;
     border-radius: 20px;
     padding: 10px;
     margin: 10px;
@@ -121,22 +122,22 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--purple);
 }
 
 #end-game-text {
-    border-bottom: 5px solid var(--purple);
+    border-bottom: 5px solid var(--white);
     padding-bottom: 10px;
 }
 
-#end-game-score {
+#end-game-subtext {
     text-align: center;
     margin-top: 10px;
 }
 
 input {
     background-color: var(--teal);
-    color: white;
+    color: var(--white);
     border-radius: 20px;
     font-size: 20px;
     padding: 20px;
@@ -145,7 +146,7 @@ input {
 }
 
 ::placeholder {
-    color: white;
+    color: var(--white);
     font-size: 20px;
 }
 

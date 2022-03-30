@@ -14,7 +14,7 @@ let currentQuestionIndex = 0;
 var endGameContainer = document.getElementById('end-game');
 var playerInitialsEl = document.getElementById('player-initials-el');
 var endGameTextEl = document.getElementById('end-game-text');
-var endGameScoreEl = document.getElementById('end-game-score');
+var endGameScoreEl = document.getElementById('end-game-subtext');
 
 var highScoreObj = {
     initials: null,
@@ -32,44 +32,44 @@ const questions = [
    ]
  },
 
-//  {  
-//  question: "Which built-in method reverses the order of the elements of an array?",
-//  answers: [
-//     { text: 'changeOrder(order)', correct: false },
-//     { text: 'sort(order)', correct: false },
-//     { text: 'reverse()', correct: true },
-//     { text: 'None of the above', correct: false },
-//     ]
-//  },
+ {  
+ question: "Which built-in method reverses the order of the elements of an array?",
+ answers: [
+    { text: 'changeOrder(order)', correct: false },
+    { text: 'sort(order)', correct: false },
+    { text: 'reverse()', correct: true },
+    { text: 'None of the above', correct: false },
+    ]
+ },
 
-//  {  
-//  question: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
-//  answers: [
-//     { text: "The User's machine running a Web browser", correct: true },
-//     { text: 'The Web server', correct: false },
-//     { text: "A central machine deep within Netscape's corporate offices", correct: false },
-//     { text: 'None of the above', correct: false },
-//     ]
-//     },
+ {  
+ question: "When a user views a page containing a JavaScript program, which machine actually executes the script?",
+ answers: [
+    { text: "The User's machine running a Web browser", correct: true },
+    { text: 'The Web server', correct: false },
+    { text: "A central machine deep within Netscape's corporate offices", correct: false },
+    { text: 'None of the above', correct: false },
+    ]
+    },
 
-// {  
-//  question: "Javascript is an _______ language?",
-//  answers: [
-//     { text: "Object-Based", correct: false },
-//     { text: 'Procedural', correct: false },
-//     { text: "Object Oriented", correct: true },
-//     { text: 'None of the above', correct: false },
-//     ]
-// },
-// {  
-//  question: "Which of the following keywords is used to define a variable in Javascript?",
-//  answers: [
-//     { text: "var", correct: false },
-//     { text: 'let', correct: false },
-//     { text: "both var and let", correct: true },
-//     { text: 'None of the above', correct: false },
-//     ]
-//    },
+{  
+ question: "Javascript is an _______ language?",
+ answers: [
+    { text: "Object-Based", correct: false },
+    { text: 'Procedural', correct: false },
+    { text: "Object Oriented", correct: true },
+    { text: 'None of the above', correct: false },
+    ]
+},
+{  
+ question: "Which of the following keywords is used to define a variable in Javascript?",
+ answers: [
+    { text: "var", correct: false },
+    { text: 'let', correct: false },
+    { text: "both var and let", correct: true },
+    { text: 'None of the above', correct: false },
+    ]
+   },
 
 
 ]
