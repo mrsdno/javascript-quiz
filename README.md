@@ -1,21 +1,29 @@
-# javascript-quiz
+# Javascript Quiz
 
-## User Story
-AS A coding boot camp student
-I WANT to take a timed quiz on JavaScript fundamentals that stores high scores
-SO THAT I can gauge my progress compared to my peers
 
-## Acceptance Criteria
 
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score
+## Test your Javascript knowledge with this fun quiz!
 
+---
+
+## ![screenshot of Christine's javascript quiz](assets/screenshot.png)
+
+## Can you get the high score?? Try your luck <a href='https://mrsdno.github.io/javascript-quiz/'>here!</a>
+
+---
+
+>This is a timed quiz that tests your knowledge on javascript.
+>
+>To get the high score, you must end the quiz with the most time remaining.
+>
+>Press "Start" to begin the quiz. Then the timer starts!
+>
+>You have one minute to answer the 5 quiz questions.
+>
+>Each time you get an answer wrong, you lose 5 seconds off the clock!
+>
+>When you get the end of the quiz, if you get the high score you will be asked to enter you initals and save the high score.
+
+Created by Christine Diienno
+
+<a href="mailto:christine@dno.dev">christine@dno.dev</a>

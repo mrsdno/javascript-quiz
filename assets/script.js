@@ -147,34 +147,37 @@ function nextQuestion() {
     clearQuestionContainer();
     currentQuestionIndex ++;
     displayQuestion(); 
-    console.log(currentQuestionIndex);
 }
 
 function displayQuestion() {
       //question if current index < index length
     
     if (currentQuestionIndex < questions.length) {
-    let question = questions[currentQuestionIndex].question;
-    questionElement.textContent = question;
+        //show the question and answer elements
+        answerButtonsEl.classList.remove('hide');
+        questionElement.classList.remove('hide');
+        //assign question to current question index
+        let question = questions[currentQuestionIndex].question;
+        questionElement.textContent = question;
+        
     
-  
-    //loop through answer options and append them to the container
-    questions[currentQuestionIndex].answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.classList.add('btn-answer');
+        //loop through answer options and append them to the container
+        questions[currentQuestionIndex].answers.forEach(answer => {
+            const button = document.createElement('button');
+            button.innerText = answer.text;
+            button.classList.add('btn-answer');
 
-  
-        //assign a string to the correct answer if it is selected
-        if (answer.correct) {
-            button.dataset.correct = answer.correct;
-        }
+    
+            //assign a string to the correct answer if it is selected
+            if (answer.correct) {
+                button.dataset.correct = answer.correct;
+            }
 
-        //call select answer function if button is clicked 
-        button.addEventListener('click', selectAnswer);
+            //call select answer function if button is clicked 
+            button.addEventListener('click', selectAnswer);
 
-  
-        answerButtonsEl.appendChild(button);
+    
+            answerButtonsEl.appendChild(button);
       })
     }
         else {
@@ -196,17 +199,26 @@ function selectAnswer(e) {
 
     const selectedButton = e.target;
     var selectedButtonCorrect = selectedButton.getAttribute("data-correct");
+    const minusFiveSeconds=document.createElement('p');
+    minusFiveSeconds.classList.add('time-lost')
+
 
     if (selectedButtonCorrect === "true") {
         console.log('i am true');
-        //player gets 1 point
+        //show next button
         nextButton.classList.remove('hide');
+        answerButtonsEl.classList.add('hide');
+        questionElement.classList.add('hide');
     }
     else {
         console.log('my value is false');
         //lose 5 seconds for getting the wrong answer
         timeLeft=timeLeft-5;
-    }
+        minusFiveSeconds.textContent ='-5 seconds! Try Again!';
+        questionContainer.appendChild(minusFiveSeconds);
+        setTimeout(function(){
+            minusFiveSeconds.remove()}, 1000);
+        }
     
 
 }
