@@ -8,7 +8,7 @@
 
 ## ![screenshot of Christine's javascript quiz](assets/screenshot.png)
 
-## Can you get the high score?? Try your luck <a href='https://mrsdno.github.io/javascript-quiz/'>here!</a>
+## Can you get the high score?? Test your knowledge <a href='https://mrsdno.github.io/javascript-quiz/'>here</a>!
 
 ---
 
